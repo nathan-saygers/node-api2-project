@@ -117,7 +117,47 @@ router.post('/', (req, res) => {
   }
 })
 
-//
+// GET comments associated with a post id
+
+router.get('/:id/comments', (req, res) => {
+  const postID = req.params.id
+  console.log(postID);
+  dbActions.findPostComments(postID)
+    .then(comments => {
+      if(comments[0]) {
+        res.status(201).json(comments)
+      } else {
+        res.status(404).json({
+          message: "The post with the specified ID does not exist."
+        })
+      }
+    })
+    .catch(error => {
+      console.log(error)
+      res.status(500).json({
+        error: "The comments information could not be retrieved."
+      })
+    })
+})
+//POST a comment
+router.post('/:id/comments', (req, res) => {
+  dbActions.insertComment(req.body)
+    .then(comment => {
+      if(req.body.text) {
+        res.status(201).json(dbActions.findCommentById(comment.id).then().catch())
+      } else {
+        res.status(400).json({
+          errorMessage: "Please provide text for the comment."
+        })
+      }
+    })
+    .catch(error => {
+      console.log(error)
+      res.status(404).json({
+        message: "The post with the specified ID does not exist."
+      })
+    })
+})
 
 
 

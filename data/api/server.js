@@ -1,7 +1,6 @@
 const express = require('express');
 
 const postsRouter = require('../routers/posts-router.js');
-const commentsRouter = require('../routers/comments-router.js');
 
 const server = express();
 
