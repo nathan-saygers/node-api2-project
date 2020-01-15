@@ -5,7 +5,10 @@ const commentsRouter = require('../routers/comments-router.js');
 
 const server = express();
 
+server.get('/', (req, res) => {
+  res.send(`<h1>Is it working? yes.</h1>`);
+})
+
 server.use('/api/posts', postsRouter)
-server.use('/api/posts/:id/comments', commentsRouter)
 
 module.exports = server;

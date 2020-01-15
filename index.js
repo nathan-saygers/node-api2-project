@@ -1,4 +1,4 @@
-const server = require('./api/server');
+const server = require('./data/api/server.js');
 // add an endpoint that returns all the messages for a hub
 // add an endpoint for adding new message to a hub
 
