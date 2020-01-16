@@ -46,8 +46,9 @@ router.delete('/:id', (req, res) => {
   const id = req.params.id;
   dbActions.remove(id)
     .then(post => {
+      console.log(post);
       if(post > 0) {
-        res.status(204).json({
+        res.status(202).json({
           message: "The post with the specified ID has been removed."
         })
       } else {
